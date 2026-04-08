@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lớp 12A1 – Thanh Xuân Rực Rỡ</title>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --teal: #3ecfb2;
+      --purple: #b09de8;
+      --navy: #1a1a2e;
+      --white: #ffffff;
+      --text: #2d2d2d;
+      --muted: #555;
+      --red-accent: #e05a6a;
+      --blue-accent: #2a7fd4;
+      --yellow: #ffe96a;
+      --card-radius: 18px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: linear-gradient(135deg, #3ecfb2 0%, #91bbee 55%, #c9b4f0 100%);
+      min-height: 100vh;
+      color: var(--text);
+    }
+
+    /* ── HEADER ── */
+    header {
+      text-align: center;
+      padding: 44px 20px 24px;
+      position: relative;
+    }
+
+    header h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 56px;
+      color: #fff;
+      text-shadow: 0 3px 12px rgba(0,0,0,0.18);
+      letter-spacing: 2px;
+      animation: fadeDown 0.7s ease both;
+    }
+
+    header .tagline {
+      color: var(--yellow);
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-top: 6px;
+      animation: fadeDown 0.9s ease both;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--navy);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+    }
+
+    nav ul {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      list-style: none;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 15px 28px;
+      color: #ccc;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 600;
+      transition: color 0.2s, background 0.2s;
+      position: relative;
+    }
+
+    nav ul li a::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      width: 0; height: 3px;
+      background: var(--teal);
+      border-radius: 2px;
+      transition: width 0.25s, left 0.25s;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #fff;
+      background: rgba(255,255,255,0.07);
+    }
+
+    nav ul li a:hover::after,
+    nav ul li a.active::after {
+      width: 100%; left: 0;
+    }
+
+    /* ── MAIN ── */
+    main {
+      max-width: 920px;
+      margin: 28px auto 48px;
+      padding: 0 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    /* ── SECTION CARDS ── */
+    .section-card {
+      background: #fff;
+      border-radius: var(--card-radius);
+      padding: 34px 40px;
+      animation: fadeUp 0.6s ease both;
+      display: none;
+    }
+
+    .section-card.active {
+      display: block;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ── INTRO ── */
+    .intro-tagline {
+      font-size: 17px;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--red-accent);
+      margin-bottom: 14px;
+    }
+
+    .intro-body p {
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: #333;
+      margin-bottom: 4px;
+    }
+
+    .intro-highlight {
+      color: var(--blue-accent);
+      font-weight: 700;
+      margin-top: 12px;
+      font-size: 15.5px;
+    }
+
+    .school-intro-box {
+      background: linear-gradient(135deg, #f2fbff, #f7f9ff);
+      border: 1px solid #dbeafe;
+      border-radius: 14px;
+      padding: 18px 20px;
+    }
+
+    .school-intro-box p {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #374151;
+      margin-bottom: 8px;
+    }
+
+    .school-intro-box p:last-child {
+      margin-bottom: 0;
+      color: #1f4f8a;
+      font-weight: 700;
+    }
+
+    .school-story-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .school-story-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .school-story-item.reverse {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    }
+
+    .school-story-media,
+    .school-story-text {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #dbeafe;
+      background: #f8fbff;
+    }
+
+    .school-story-media {
+      min-height: 200px;
+    }
+
+    .school-story-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background: #eef4ff;
+    }
+
+    .school-story-text {
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .school-story-text h4 {
+      font-size: 17px;
+      color: #174780;
+      font-weight: 800;
+    }
+
+    .school-story-text p {
+      font-size: 14.5px;
+      line-height: 1.75;
+      color: #3a4a61;
+    }
+
+    .school-story-hint {
+      color: #2a7fd4;
+      font-style: italic;
+      font-weight: 700;
+      text-align: justify;
+      text-justify: inter-word;
+    }
+
+    /* ── TEACHER ── */
+    .teacher-wrap {
+      display: flex;
+      gap: 26px;
+      align-items: flex-start;
+    }
+
+    .teacher-wrap.reverse {
+      flex-direction: row-reverse;
+    }
+
+    .teacher-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 12px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: #e8f5e9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border: 3px solid #c8e6c9;
+    }
+
+    .teacher-photo svg { width: 100%; height: 100%; }
+
+    .teacher-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background: #f2f7ff;
+    }
+
+    .teacher-info h3 {
+      font-size: 20px;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: var(--text);
+    }
+
+    .teacher-info p {
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: #444;
+    }
+
+    .teacher-scroll-text {
+      text-align: justify;
+      text-justify: inter-word;
+      max-height: calc(1.8em * 7);
+      overflow-y: auto;
+      padding-right: 6px;
+      margin: 0;
+    }
+
+    .teacher-scroll-text::-webkit-scrollbar {
+      width: 7px;
+    }
+
+    .teacher-scroll-text::-webkit-scrollbar-thumb {
+      background: #b7c4df;
+      border-radius: 999px;
+    }
+
+    /* ── GALLERY ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+
+    .gallery-grid.scrollable {
+      max-height: 700px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .gallery-grid.scrollable::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .gallery-grid.scrollable::-webkit-scrollbar-thumb {
+      background: #9cc6ef;
+      border-radius: 999px;
+    }
+
+    .gallery-item {
+      border-radius: 10px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #b2dfdb, #ce93d8);
+      height: 160px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background: #eef4ff;
+    }
+
+    .gallery-item:hover {
+      transform: scale(1.04);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    /* ── VIDEO ── */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .video-thumb {
+      border-radius: 10px;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1a2e, #3a3a5e);
+      height: 160px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+      position: relative;
+    }
+
+    .video-thumb:hover { transform: scale(1.03); }
+
+    .play-btn {
+      width: 52px;
+      height: 52px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+      border: 2px solid rgba(255,255,255,0.5);
+    }
+
+    .play-btn::after {
+      content: '';
+      border-left: 18px solid white;
+      border-top: 11px solid transparent;
+      border-bottom: 11px solid transparent;
+      margin-left: 4px;
+    }
+
+    /* ── MEMBERS ── */
+    .members-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .member-card {
+      background: #f7f9ff;
+      border-radius: 12px;
+      padding: 18px 10px 14px;
+      text-align: center;
+      border: 1.5px solid #e0e7ff;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .member-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(100,100,200,0.12);
+    }
+
+    .member-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      margin: 0 auto 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      color: white;
+    }
+
+    .member-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: #333;
+      line-height: 1.4;
+    }
+
+    .member-role {
+      font-size: 11.5px;
+      color: #888;
+      margin-top: 3px;
+    }
+
+    /* ── SLIDER ẢNH TẬP THỂ ── */
+    .slider-section {
+      margin-top: 28px;
+    }
+
+    .slider-label {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slider-wrap {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #111;
+      aspect-ratio: 16/9;
+      max-height: 480px;
+    }
+
+    .slider-track {
+      display: flex;
+      height: 100%;
+      transition: transform 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      color: #aaa;
+      background: #1a1a1a;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background: #101010;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.45);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 10;
+      user-select: none;
+    }
+
+    .slider-btn:hover { background: rgba(0,0,0,0.7); }
+    .slider-btn.prev { left: 14px; }
+    .slider-btn.next { right: 14px; }
+
+    .slider-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ccc;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .dot.active {
+      background: var(--teal);
+      transform: scale(1.3);
+    }
+
+    /* ── GALLERY SLIDER NGANG ── */
+    .hgallery-wrap {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hgallery-track {
+      display: flex;
+      gap: 14px;
+      transition: transform 0.4s cubic-bezier(0.4,0,0.2,1);
+    }
+
+    .hgallery-item {
+      min-width: calc(25% - 11px);
+      height: 180px;
+      border-radius: 12px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #ddd;
+      cursor: pointer;
+    }
+
+    .hgallery-item img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background: #eef4ff;
+      transition: transform 0.3s;
+    }
+
+    .hgallery-item:hover img { transform: scale(1.06); }
+
+    .hgallery-item.placeholder {
+      background: linear-gradient(135deg,#b2dfdb,#80cbc4);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 13px; font-weight: 700;
+    }
+
+    .hslider-btn {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      background: rgba(0,0,0,0.45);
+      color: white; border: none;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+
+    .hslider-btn:hover { background: rgba(0,0,0,0.7); }
+    .hslider-btn.hprev { left: 8px; }
+    .hslider-btn.hnext { right: 8px; }
+
+    /* ── VIDEO SECTION ── */
+    .video-section { margin-top: 8px; }
+
+    .video-embed-wrap {
+      position: relative;
+      width: 60%;
+      margin: 0 auto;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #000;
+      aspect-ratio: 16/9;
+    }
+
+    .video-embed-wrap iframe {
+      width: 100%; height: 100%;
+      border: none; display: block;
+    }
+
+    .yt-link {
+      display: block;
+      text-align: center;
+      margin-top: 12px;
+      color: var(--blue-accent);
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .yt-link:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+      .hgallery-item { min-width: calc(50% - 7px); }
+      .video-embed-wrap { width: 100%; }
+      .school-story-item,
+      .school-story-item.reverse {
+        grid-template-columns: 1fr;
+      }
+      .school-story-media {
+        min-height: 180px;
+      }
+      .members-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      header h1 { font-size: 38px; }
+      .section-card { padding: 22px 20px; }
+      nav ul li a { padding: 12px 14px; font-size: 13px; }
+      .teacher-wrap { flex-direction: column; }
+      .teacher-photo { width: 100%; height: 180px; }
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 12px 24px;
+      margin-top: 18px;
+      color: #ffffff;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.6px;
+      background: linear-gradient(90deg, rgba(26, 26, 46, 0.78), rgba(42, 127, 212, 0.58), rgba(224, 90, 106, 0.62));
+      backdrop-filter: blur(4px);
+      border-top: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.18);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .zoomable-image {
+      cursor: zoom-in;
+    }
+
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 14, 24, 0.86);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1200;
+      padding: 22px;
+    }
+
+    .image-modal.active {
+      display: flex;
+    }
+
+    .image-modal-content {
+      position: relative;
+      width: min(92vw, 1100px);
+      height: min(88vh, 820px);
+      border-radius: 14px;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(2px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-modal img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      background: #0c1118;
+    }
+
+    .image-modal-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(0, 0, 0, 0.55);
+      color: #fff;
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .image-modal-close:hover {
+      background: rgba(0, 0, 0, 0.75);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🎓 Lớp 12A1 🎓</h1>
+  <div class="tagline">✨ Thanh xuân rực rỡ ✨</div>
+</header>
+
+<nav>
+  <ul>
+    <li><a href="#" class="active" data-tab="gioi-thieu">Giới thiệu chung</a></li>
+    <li><a href="#" data-tab="truong_hoc">Trường học</a></li>
+    <li><a href="#" data-tab="giao-vien">Giáo viên chủ nhiệm</a></li>
+    <li><a href="#" data-tab="anh">Ảnh tập thể</a></li>
+    <li><a href="#" data-tab="kho-anh">Kho ảnh</a></li>
+    <li><a href="#" data-tab="video">Video</a></li>
+    <li><a href="#" data-tab="thanh-vien">Thành viên</a></li>
+  </ul>
+</nav>
+
+<main>
+
+  <!-- GIỚI THIỆU -->
+  <section class="section-card active" id="gioi-thieu">
+    <div class="section-title">🏫 Giới thiệu</div>
+    <div class="intro-tagline">12A1 – nơi chứa đầy kỷ niệm thanh xuân 🌟</div>
+    <div class="intro-body">
+      <p><strong>Không chỉ là một lớp học, mà là cả một bầu trời thanh xuân.</strong></p>
+      <p>Nơi có những con người "không hoàn hảo" nhưng tạo nên những kỷ niệm hoàn hảo.</p>
+      <p>Cùng nhau học, cùng nhau chơi, cùng nhau "toang" rồi lại cùng nhau đứng dậy.</p>
+      <p class="intro-highlight">Sau này mỗi người một hướng, nhưng 12A1 sẽ luôn là nơi bắt đầu của những điều đẹp nhất 💙✨</p>
+    </div>
+  </section>
+
+    <!-- TRƯỜNG HỌC -->
+  <section class="section-card" id="truong_hoc">
+    <div class="slider-label">🎥 Một số điều mà bạn có thể chưa biết về ngôi trường 12A1 đang học</div>
+    <div class="video-section">
+      <div class="video-embed-wrap">
+        <iframe
+          src="/img/truong/san_truong.jpg"
+          title="Video về ngôi trường 12A1"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+      <a class="yt-link" href="https://www.youtube.com/watch?v=CT7Bh8rMF1A&t=1s" target="_blank" id="ytLink">▶ Xem video trên YouTube</a>
+    </div>
+  </section>
+
+  <section class="section-card" id="truong_hoc-gioi-thieu">
+    <div class="section-title">🏫 Giới thiệu về trường</div>
+    <div class="school-intro-box">
+      <p>Ngôi trường của chúng ta không chỉ là nơi học tập, mà còn là nơi lưu giữ những kỷ niệm đẹp nhất của tuổi học trò.</p>
+      <p>Với đội ngũ giáo viên tận tâm, môi trường thân thiện và nhiều hoạt động ngoại khóa ý nghĩa, mỗi ngày đến trường đều là một ngày đáng nhớ.</p>
+      <p>Từ sân trường, lớp học đến từng góc nhỏ quen thuộc, tất cả đã cùng 12A1 tạo nên một thanh xuân thật rực rỡ.</p>
+    </div>
+  </section>
+
+  <section class="section-card" id="truong_hoc-story">
+    <div class="section-title">🖼️ Hành trình về trường</div>
+    <div class="school-story-list">
+      <div class="school-story-item">
+        <div class="school-story-media">
+          <img src="img/kho_anh/anh1.jpg" alt="Khoảnh khắc trường học 1"/>
+        </div>
+        <div class="school-story-text">
+          <h4>Chặng 1</h4>
+          <p class="school-story-hint">Trường Trường Trung học Phô thông Thụy Hương là một ngôi trường có khuôn viên rộng rãi, khang trang và xanh mát.Môi trường học tập thân thiện, năng động. Học sinh của trường luôn chăm ngoan, tích cực tham gia các hoạt động học tập và ngoại khóa. Đội ngũ giáo viên giàu kinh nghiệm, tận tâm với nghề, luôn hết lòng vì học sinh. Trường còn chú trọng giáo dục toàn diện, giúp học sinh phát triển cả tri thức lẫn kỹ năng sống. Đây thực sự là nơi chắp cánh ước mơ cho nhiều thế hệ học sinh.</p>
+        </div>
+      </div>
+
+      <div class="school-story-item reverse">
+        <div class="school-story-text">
+          <h4>Chặng 2</h4>
+          <p class="school-story-hint">Bên cạnh đó với không khí trang trọng và ý nghĩa. Trên sân khấu, các thầy cô giáo được vinh danh vì những đóng góp xuất sắc trong công tác giảng dạy. Phía sau là khẩu hiệu quen thuộc, thế hiện vai trò quan trọng của giáo dục trong việc "trồng người". Những tà áo dài rực rỡ tạo nên hình ảnh đẹp, đậm nét truyền thống của nhà trường. Buổi lễ không chỉ là dịp ghi nhận thành tích mà còn là nguồn động lực để giáo viên tiếp tục cống hiến. Qua đó, nhà trường khẳng định sự quan tâm đến chất lượng giáo dục và sự phát triển toàn diện.</p>
+        </div>
+        <div class="school-story-media">
+          <img src="img/truong/khen_thuong.jpg" alt="Khoảnh khắc trường học 2"/>
+        </div>
+      </div>
+
+      <div class="school-story-item">
+        <div class="school-story-media">
+          <img src="img/truong/tang_qua.jpg" alt="Khoảnh khắc trường học 3"/>
+        </div>
+        <div class="school-story-text">
+          <h4>Chặng 3</h4>
+          <p class="school-story-hint">THPT Thụy Hương trao tặng các bạn học sinh có hoàn cảnh khó khăn mang chở những giá trị tinh thần vô cùng sâu sắc. Trong sắc đỏ rực rỡ của những túi quà, đó không chỉ là sự hỗ trợ về vật chất mà còn là tấm lòng ân cần, sự sẻ chia ấm áp của thầy cô và bè bạn. Mỗi phần quà được trao đi như một lời động viên chân thành, giúp vơi bớt nỗi lo toan và mang hơi ấm mùa xuân đến với từng gia đình.
+Hoạt động này đã thắp lên niềm tin, khơi dậy tinh thần lạc quan để các bạn vững bước hơn trên con đường học tập. Qua đó, truyền thống "tương thân tương ái" tốt đẹp của dân tộc được giữ gìn và lan tỏa mạnh mẽ ngay dưới mái trường thân yêu.</p>
+        </div>
+      </div>
+
+      <div class="school-story-item reverse">
+        <div class="school-story-text">
+          <h4>Chặng 4</h4>
+          <p class="school-story-hint">Bên cạnh các hoạt động học tập và ngoại khóa tại trường, Trường Trung học Phổ thông Thụy Hương còn thường xuyên tổ chức các chuyến du lịch, tham quan dã ngoại nhằm tạo điều kiện cho học sinh được trải nghiệm thực tế. Những chuyến đi không chỉ giúp học sinh thư giãn sau thời gian học tập căng thẳng mà còn mở rộng hiểu biết về văn hóa, lịch sử và thiên nhiên.
+
+Trong mỗi chuyến tham quan, học sinh có cơ hội khám phá những địa danh nổi tiếng, tìm hiểu về truyền thống dân tộc cũng như giao lưu, gắn kết với bạn bè và thầy cô. Không khí vui tươi, hào hứng trong suốt hành trình đã tạo nên những kỷ niệm đáng nhớ của tuổi học trò.
+
+Đây cũng là dịp để học sinh rèn luyện các kỹ năng mềm như làm việc nhóm, tự lập, giao tiếp và thích nghi với môi trường mới. Thông qua hoạt động này, nhà trường không chỉ nâng cao đời sống tinh thần cho học sinh mà còn góp phần phát triển toàn diện, giúp các em trưởng thành hơn trong học tập và cuộc sống.</p>
+        </div>
+        <div class="school-story-media">
+          <img src="img/truong/tham_quan.jpg" alt="Khoảnh khắc trường học 4"/>
+        </div>
+      </div>
+
+      <div class="school-story-item">
+        <div class="school-story-media">
+          <img src="img/truong/san_choi.jpg" alt="Khoảnh khắc trường học 5"/>
+        </div>
+        <div class="school-story-text">
+          <h4>Chặng 5</h4>
+          <p class="school-story-hint">Bên cạnh đó trường còn có nhiều các hoạt động ngoại khóa như trải nghiệm , hướng nghiệp và Đặc biệt hơn là hội chợ Tết ngay tại sân trường THPT Thụy Hương.Giữa khoảng sân rộng, các nhóm học sinh quây quần bên những gian hàng tự dựng, cùng nhau đỏ lửa nấu nướng khiến làn khói trắng bay lên mờ ảo, tạo nên khung cảnh rất đặc trưng của ngày hội. Tiếng cười nói, giao lưu giữa các lớp làm bừng sáng cả không gian học đường, thắt chặt thêm tình bạn khăng khít.
+Đây là dịp để các bạn trẻ trố tài khéo léo, từ việc trang trí trại đến chế biến những món ăn truyền thống mang đậm hương vị Tết. Những trải nghiệm thực tế này không chỉ là kỷ niệm đẹp của tuổi học trò mà còn giúp học sinh rèn luyện kỹ năng làm việc nhóm và sự năng động.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GIÁO VIÊN -->
+  <section class="section-card" id="giao-vien">
+    <div class="section-title">👩‍🏫 Giáo viên chủ nhiệm 12A1</div>
+    <div class="teacher-wrap">
+      <div class="teacher-photo">
+        <img src="img/giao_vien/kim_anh.jpg" alt="Ảnh cô Nguyễn Thị Kim Anh"/>
+      </div>
+      <div class="teacher-info">
+        <h3>Nguyễn Thị Kim Anh</h3>
+        <p>Cô không chỉ là người truyền đạt kiến thức mà còn là người đồng hành cùng chúng em suốt những năm tháng thanh xuân rực rỡ. Với sự tận tâm, nhiệt huyết và đôi khi là cả những lần "khó tính" quen thuộc, cô đã giúp 12A1 trưởng thành hơn từng ngày. Những bài học của cô không chỉ nằm trên trang vở mà còn theo chúng em trên chặng đường phía trước.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-card" id="giao-vien-2">
+    <div class="section-title">👨‍🏫 Lời tri ân gửi đến cô chủ nhiệm</div>
+    <div class="teacher-wrap reverse">
+      <div class="teacher-photo">
+        <img src="img/giao_vien/kim_anh2.jpg" alt="Ảnh cô Kim Anh 2"/>
+      </div>
+      <div class="teacher-info">
+        <!-- <h3>Lời tri ân gửi đến cô chủ nhiệm</h3> -->
+        <p class="teacher-scroll-text">
+
+Cô là người luôn đồng hành cùng chúng em như một người mẹ thứ hai trong suốt những năm tháng học tập dưới mái trường. Trong từng tiết học, từng buổi sinh hoạt lớp, cô luôn dõi theo và quan tâm đến từng học sinh, từ những điều nhỏ nhất.
+
+Những lúc chúng em mắc lỗi, cô không trách phạt nặng nề mà luôn nhẹ nhàng nhắc nhở, bao dung và cho chúng em cơ hội sửa sai. Chính sự nghiêm khắc nhưng đầy tình cảm ấy đã giúp chúng em trưởng thành hơn từng ngày. Có những lúc cô phải nhắc đi nhắc lại chuyện làm bài tập, chuyện học hành, nhưng đằng sau đó là sự lo lắng và mong muốn chúng em có một tương lai tốt hơn.
+
+Cô luôn là người đến sớm, âm thầm chuẩn bị và nhắc nhở chúng em giữ gìn vệ sinh lớp học, sắp xếp bàn ghế ngay ngắn để có một môi trường học tập tốt nhất. Những điều tưởng chừng nhỏ bé ấy lại là bài học lớn về ý thức và trách nhiệm mà cô đã dạy cho chúng em.
+
+Không chỉ trong học tập, cô còn luôn bên cạnh để lắng nghe, chia sẻ và định hướng cho chúng em trong những quyết định quan trọng của cuộc đời. Từ việc chọn trường, chọn ngành cho đến những lúc chúng em hoang mang về tương lai, cô đều tận tình tư vấn, đưa ra những lời khuyên chân thành để chúng em có thể tự tin bước tiếp.
+
+Những khi chúng em mệt mỏi, áp lực, cô luôn là người động viên, tiếp thêm niềm tin để chúng em không bỏ cuộc. Sự quan tâm, tận tụy và tình yêu thương của cô đã gắn kết tập thể 12A1 trở thành một gia đình thực sự – nơi mà mỗi thành viên đều được quan tâm, chia sẻ và trưởng thành cùng nhau.
+
+Chúng em biết rằng, trên hành trình làm nghề, cô đã dành rất nhiều tâm huyết cho từng thế hệ học sinh, và chúng em thật may mắn khi được cô dìu dắt trong những năm tháng quan trọng nhất của tuổi học trò.
+
+Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhất. Dù sau này mỗi người một con đường riêng, nhưng những bài học, những kỷ niệm và tình cảm cô dành cho chúng em sẽ mãi là hành trang quý giá theo suốt cuộc đời.</p>
+      </div>
+    </div>
+  </section>
+  <!-- ẢNH TẬP THỂ (slider nằm dưới giới thiệu) -->
+  <section class="section-card" id="anh-tap-the">
+    <div class="slider-label">📸 Ảnh tập thể 12A1</div>
+    <div class="slider-wrap">
+      <div class="slider-track" id="sliderTrack"></div>
+      <button class="slider-btn prev" id="prevBtn">&#8249;</button>
+      <button class="slider-btn next" id="nextBtn">&#8250;</button>
+    </div>
+    <div class="slider-dots" id="sliderDots"></div>
+  </section>
+  <!-- ẢNH -->
+
+  <!-- KHO ẢNH -->
+  <section class="section-card" id="kho-anh">
+    <div class="section-title">🗂️ Kho ảnh</div>
+    <div class="gallery-grid" id="gallery-kho"></div>
+  </section>
+
+  <!-- VIDEO -->
+  <section class="section-card" id="video">
+    <div class="section-title">🎬 Video</div>
+    <div class="video-grid" id="video-grid"></div>
+  </section>
+    <!-- MỘT SỐ HÌNH ẢNH KHÁC -->
+  <section class="section-card" id="hinh-anh-khac">
+    <div class="slider-label">🖼️ Một số hình ảnh khác</div>
+    <div class="hgallery-wrap">
+      <div class="hgallery-track" id="hgalleryTrack"></div>
+      <button class="hslider-btn hprev" id="hPrevBtn">&#8249;</button>
+      <button class="hslider-btn hnext" id="hNextBtn">&#8250;</button>
+    </div>
+  </section>
+
+  <!-- THÀNH VIÊN -->
+  <section class="section-card" id="thanh-vien">
+    <div class="section-title">👥 Thành viên</div>
+    <div class="members-grid" id="members-grid"></div>
+  </section>
+
+</main>
+
+<footer>
+  @2026 - 12A1 by Đào Văn Dũng
+</footer>
+
+<div class="image-modal" id="imageModal" aria-hidden="true">
+  <div class="image-modal-content">
+    <button class="image-modal-close" id="imageModalClose" aria-label="Đóng ảnh">&times;</button>
+    <img id="imageModalPreview" src="" alt="Ảnh phóng to"/>
+  </div>
+</div>
+
+<script>
+  /* ── SLIDER ── */
+  const track = document.getElementById('sliderTrack');
+  const slides = track ? track.children : [];
+  const dotsContainer = document.getElementById('sliderDots');
+  let current = 0;
+
+  function buildDots() {
+    dotsContainer.innerHTML = '';
+    if (!slides.length) return;
+    Array.from(slides).forEach((_, i) => {
+      const d = document.createElement('div');
+      d.className = 'dot' + (i === 0 ? ' active' : '');
+      d.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(d);
+    });
+  }
+
+  function goTo(idx) {
+    if (!slides.length) return;
+    current = (idx + slides.length) % slides.length;
+    track.style.transform = `translateX(-${current * 100}%)`;
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  document.getElementById('prevBtn')?.addEventListener('click', () => goTo(current - 1));
+  document.getElementById('nextBtn')?.addEventListener('click', () => goTo(current + 1));
+
+  let sliderTimer = null;
+  function startSliderAuto() {
+    if (sliderTimer) clearInterval(sliderTimer);
+    if (slides.length > 1) {
+      sliderTimer = setInterval(() => goTo(current + 1), 4000);
+    }
+  }
+
+  /* ── HORIZONTAL GALLERY SLIDER ── */
+  const hTrack = document.getElementById('hgalleryTrack');
+  const hItems = hTrack ? hTrack.children : [];
+  const visibleCount = window.innerWidth <= 600 ? 2 : 4;
+  let hOffset = 0;
+  const hItemWidth = () => hTrack.parentElement.offsetWidth / visibleCount;
+
+  function hGoTo(dir) {
+    const maxOffset = Math.max(0, hItems.length - visibleCount);
+    hOffset = Math.max(0, Math.min(hOffset + dir, maxOffset));
+    hTrack.style.transform = `translateX(-${hOffset * (hItemWidth() + 14)}px)`;
+  }
+
+  document.getElementById('hPrevBtn')?.addEventListener('click', () => hGoTo(-1));
+  document.getElementById('hNextBtn')?.addEventListener('click', () => hGoTo(1));
+
+  /* ── NAV TABS ── */
+  const links = document.querySelectorAll('nav a[data-tab]');
+  const cards = document.querySelectorAll('.section-card');
+
+  function switchTab(tabId) {
+    links.forEach(l => l.classList.toggle('active', l.dataset.tab === tabId));
+    cards.forEach(c => c.classList.remove('active'));
+
+    // Tab giới thiệu hiển thị tổng thể: hiện toàn bộ section-card.
+    if (tabId === 'gioi-thieu') {
+      cards.forEach(c => {
+        if (c.id !== 'truong_hoc-gioi-thieu' && c.id !== 'truong_hoc-story') {
+          c.classList.add('active');
+        }
+      });
+      return;
+    }
+
+    // Tab trường học hiển thị video + phần giới thiệu trường ngay bên dưới.
+    if (tabId === 'truong_hoc') {
+      document.getElementById('truong_hoc')?.classList.add('active');
+      document.getElementById('truong_hoc-gioi-thieu')?.classList.add('active');
+      document.getElementById('truong_hoc-story')?.classList.add('active');
+      return;
+    }
+
+    if (tabId === 'giao-vien') {
+      document.getElementById('giao-vien')?.classList.add('active');
+      document.getElementById('giao-vien-2')?.classList.add('active');
+      return;
+    }
+
+    // Tab ảnh tập thể dùng section slider riêng.
+    if (tabId === 'anh') {
+      document.getElementById('anh-tap-the')?.classList.add('active');
+      return;
+    }
+
+    const target = document.getElementById(tabId);
+    if (target) {
+      target.classList.add('active');
+      target.style.animation = 'none';
+      target.offsetHeight;
+      target.style.animation = '';
+    }
+  }
+
+  links.forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault();
+      switchTab(link.dataset.tab);
+    });
+  });
+
+  switchTab('gioi-thieu');
+
+  /* ── MEDIA DATA TỪ THƯ MỤC img ── */
+  const mediaData = {
+    tapThe: [
+            'img/tap_the/anh6.jpg',
+      'img/tap_the/anh1.jpg',
+      'img/tap_the/anh2.jpg',
+      'img/tap_the/anh3.jpg',
+      'img/tap_the/anh4.jpg',
+      'img/tap_the/anh5.jpg',
+      'img/tap_the/anh7.jpg',
+      'img/tap_the/anh8.jpg',
+      'img/tap_the/anh9.jpg'
+    ],
+    giaoVien: [],
+    khoAnh: [
+      'img/kho_anh/anh1.jpg',
+      'img/kho_anh/anh2.jpg',
+      'img/kho_anh/anh3.jpg',
+      'img/kho_anh/anh4.jpg',
+      'img/kho_anh/anh5.jpg',
+      'img/kho_anh/anh6.jpg',
+      'img/kho_anh/anh7.jpg',
+      'img/kho_anh/anh8.jpg',
+      'img/kho_anh/anh9.jpg',
+      'img/kho_anh/anh10.jpg',
+      'img/kho_anh/anh11.jpg',
+      'img/kho_anh/anh12.jpg',
+      'img/kho_anh/anh13.jpg',
+      'img/kho_anh/anh14.jpg',
+      'img/kho_anh/anh15.jpg',
+      'img/kho_anh/anh16.jpg',
+      'img/kho_anh/anh17.jpg',
+      'img/kho_anh/anh18.jpg',
+      'img/kho_anh/anh19.jpg',
+      'img/kho_anh/anh20.jpg',
+      'img/kho_anh/anh21.jpg',
+      'img/kho_anh/anh22.jpg',
+      'img/kho_anh/anh23.jpg',
+      'img/kho_anh/anh24.jpg',
+      'img/kho_anh/anh25.jpg',
+      'img/kho_anh/anh26.jpg',
+      'img/kho_anh/anh27.jpg',
+      'img/kho_anh/anh28.jpg',
+      'img/kho_anh/anh29.jpg',
+      'img/kho_anh/anh30.jpg',
+      'img/kho_anh/anh31.jpg',
+      'img/kho_anh/anh32.jpg',
+      'img/kho_anh/anh33.jpg',
+      'img/kho_anh/anh34.jpg',
+      'img/kho_anh/anh35.jpg',
+      'img/kho_anh/anh36.jpg',
+      'img/kho_anh/anh37.jpg'
+    ],
+    video: [
+      'img/video/7705350418805.mp4',
+      'img/video/7705359646796.mp4',
+      'img/video/7705360307528.mp4',
+      'img/video/7705362634731.mp4'
+    ]
+  };
+
+  function appendImageCards(containerId, imagePaths) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.innerHTML = '';
+    container.classList.toggle('scrollable', containerId === 'gallery-kho' && imagePaths.length > 12);
+
+    if (!imagePaths.length) {
+      const empty = document.createElement('div');
+      empty.className = 'gallery-item';
+      empty.textContent = 'Chưa có ảnh trong thư mục';
+      container.appendChild(empty);
+      return;
+    }
+
+    imagePaths.forEach((path, index) => {
+      const item = document.createElement('div');
+      item.className = 'gallery-item';
+      item.innerHTML = `<img src="${path}" alt="Ảnh kỷ niệm ${index + 1}"/>`;
+      container.appendChild(item);
+    });
+  }
+
+  function appendSliderImages() {
+    if (!track) return;
+    const sliderImages = mediaData.tapThe.length ? mediaData.tapThe : mediaData.khoAnh.slice(0, 4);
+    track.innerHTML = '';
+
+    if (!sliderImages.length) {
+      track.innerHTML = '<div class="slide">Chưa có ảnh tập thể trong thư mục img/tap_the</div>';
+      return;
+    }
+
+    sliderImages.forEach((path, index) => {
+      const slide = document.createElement('div');
+      slide.className = 'slide';
+      slide.innerHTML = `<img src="${path}" alt="Ảnh tập thể ${index + 1}"/>`;
+      track.appendChild(slide);
+    });
+  }
+
+  function appendHorizontalGallery() {
+    if (!hTrack) return;
+    const images = mediaData.khoAnh;
+    hTrack.innerHTML = '';
+
+    if (!images.length) {
+      hTrack.innerHTML = '<div class="hgallery-item placeholder">Chưa có ảnh trong img/kho_anh</div>';
+      return;
+    }
+
+    images.forEach((path, index) => {
+      const item = document.createElement('div');
+      item.className = 'hgallery-item';
+      item.innerHTML = `<img src="${path}" alt="Kho ảnh ${index + 1}"/>`;
+      hTrack.appendChild(item);
+    });
+  }
+
+  function appendVideoCards() {
+    const container = document.getElementById('video-grid');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (!mediaData.video.length) {
+      const empty = document.createElement('div');
+      empty.className = 'video-thumb';
+      empty.textContent = 'Chưa có video trong thư mục img/video';
+      container.appendChild(empty);
+      return;
+    }
+
+    mediaData.video.forEach((path, index) => {
+      const card = document.createElement('div');
+      card.className = 'video-thumb';
+      card.style.background = '#0f172a';
+      card.style.padding = '8px';
+      card.style.height = 'auto';
+      card.style.minHeight = '220px';
+
+      card.innerHTML = `
+        <video controls preload="metadata" style="width:100%;aspect-ratio:16/9;border-radius:8px;background:#000;display:block;">
+          <source src="${path}" type="video/mp4" />
+          Trình duyệt không hỗ trợ video.
+        </video>
+        <span style="font-size:13px;font-weight:700;margin-top:8px;text-align:center;display:block;">Video ${index + 1}</span>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  appendSliderImages();
+  appendHorizontalGallery();
+  appendVideoCards();
+  appendImageCards('gallery-main', mediaData.khoAnh.slice(0, 6));
+  appendImageCards('gallery-kho', mediaData.khoAnh);
+  buildDots();
+  goTo(0);
+  startSliderAuto();
+
+  /* ── MEMBERS ── */
+  const members = [
+    { name: 'Đào Văn Dũng', role: 'Trưởng nhóm · Coder chính · Biên soạn nội dung', color: '#5c6bc0', init: 'ĐD' },
+    { name: 'Nguyễn Phương Anh T8', role: 'Thiết kế', color: '#26a69a', init: 'PA' },
+    { name: 'Nguyễn Phương Anh T3', role: 'Tổng hợp', color: '#ec407a', init: 'PA' },
+    { name: 'Bùi Anh Kiệt', role: 'Thiết kế', color: '#42a5f5', init: 'BK' },
+    { name: 'Trần Tuệ Linh', role: 'Phó nhóm', color: '#66bb6a', init: 'TL' },
+    { name: 'Bùi Nam Khánh', role: 'Kiểm tra', color: '#ab47bc', init: 'BK' },
+    { name: 'Vũ Văn Hiếu', role: 'Hiệu ứng / Hỗ trợ', color: '#ff7043', init: 'VH' },
+    { name: 'Hoàng Hải Nam', role: 'Hỗ trợ tổng hợp', color: '#ffca28', init: 'HN' },
+    { name: 'Nguyễn Xuân Nghĩa', role: 'Phụ trách / Tổng hợp', color: '#26c6da', init: 'NN' },
+    { name: 'Phạm Minh Đức', role: 'Tổng hợp hình ảnh', color: '#7e57c2', init: 'ĐD' },
+    { name: 'Mai Quang Tiến', role: 'Tổng hợp video', color: '#ef5350', init: 'MT' },
+  ];
+
+  const membersGrid = document.getElementById('members-grid');
+  members.forEach(m => {
+    const div = document.createElement('div');
+    div.className = 'member-card';
+    div.innerHTML = `
+      <div class="member-avatar" style="background:${m.color}">${m.init}</div>
+      <div class="member-name">${m.name}</div>
+      <div class="member-role">${m.role}</div>
+    `;
+    membersGrid.appendChild(div);
+  });
+
+  /* ── IMAGE MODAL ── */
+  const imageModal = document.getElementById('imageModal');
+  const imageModalPreview = document.getElementById('imageModalPreview');
+  const imageModalClose = document.getElementById('imageModalClose');
+
+  function openImageModal(src, altText) {
+    if (!src || !imageModal || !imageModalPreview) return;
+    imageModalPreview.src = src;
+    imageModalPreview.alt = altText || 'Ảnh phóng to';
+    imageModal.classList.add('active');
+    imageModal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImageModal() {
+    if (!imageModal || !imageModalPreview) return;
+    imageModal.classList.remove('active');
+    imageModal.setAttribute('aria-hidden', 'true');
+    imageModalPreview.src = '';
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('main img').forEach(img => {
+    img.classList.add('zoomable-image');
+    img.addEventListener('click', () => openImageModal(img.src, img.alt));
+  });
+
+  imageModalClose?.addEventListener('click', closeImageModal);
+  imageModal?.addEventListener('click', e => {
+    if (e.target === imageModal) closeImageModal();
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && imageModal?.classList.contains('active')) {
+      closeImageModal();
+    }
+  });
+</script>
+</body>
+</html>
