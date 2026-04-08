@@ -1143,7 +1143,7 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
     imagePaths.forEach((path, index) => {
       const item = document.createElement('div');
       item.className = 'gallery-item';
-      item.innerHTML = `<img src="${path}" alt="Ảnh kỷ niệm ${index + 1}"/>`;
+      item.innerHTML = `<img src="${path}" alt="Ảnh kỷ niệm ${index + 1}" loading="lazy" decoding="async"/>`;
       container.appendChild(item);
     });
   }
@@ -1161,7 +1161,8 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
     sliderImages.forEach((path, index) => {
       const slide = document.createElement('div');
       slide.className = 'slide';
-      slide.innerHTML = `<img src="${path}" alt="Ảnh tập thể ${index + 1}"/>`;
+      const loadingMode = index === 0 ? 'eager' : 'lazy';
+      slide.innerHTML = `<img src="${path}" alt="Ảnh tập thể ${index + 1}" loading="${loadingMode}" decoding="async"/>`;
       track.appendChild(slide);
     });
   }
@@ -1179,7 +1180,7 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
     images.forEach((path, index) => {
       const item = document.createElement('div');
       item.className = 'hgallery-item';
-      item.innerHTML = `<img src="${path}" alt="Kho ảnh ${index + 1}"/>`;
+      item.innerHTML = `<img src="${path}" alt="Kho ảnh ${index + 1}" loading="lazy" decoding="async"/>`;
       hTrack.appendChild(item);
     });
   }
@@ -1206,7 +1207,7 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
       card.style.minHeight = '220px';
 
       card.innerHTML = `
-        <video controls preload="metadata" style="width:100%;aspect-ratio:16/9;border-radius:8px;background:#000;display:block;">
+        <video controls preload="none" playsinline style="width:100%;aspect-ratio:16/9;border-radius:8px;background:#000;display:block;">
           <source src="${path}" type="video/mp4" />
           Trình duyệt không hỗ trợ video.
         </video>
@@ -1274,7 +1275,11 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
     document.body.style.overflow = '';
   }
 
-  document.querySelectorAll('main img').forEach(img => {
+  document.querySelectorAll('main img').forEach((img, index) => {
+    if (!img.hasAttribute('loading')) {
+      img.loading = index < 2 ? 'eager' : 'lazy';
+    }
+    img.decoding = 'async';
     img.classList.add('zoomable-image');
     img.addEventListener('click', () => openImageModal(img.src, img.alt));
   });
