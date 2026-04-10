@@ -458,12 +458,12 @@
     }
 
     #kho-anh .gallery-grid {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 16px;
     }
 
     #kho-anh .gallery-item {
-      height: 210px;
+      height: 280px;
     }
 
     /* ── VIDEO ── */
@@ -503,6 +503,38 @@
 
     #video .video-thumb {
       min-height: 360px;
+    }
+
+    .video-volume-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: -6px 0 14px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      border: 1px solid #edd4e2;
+      background: linear-gradient(180deg, #fff7fb 0%, #f3f8ff 100%);
+    }
+
+    .video-volume-wrap label {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: #7d1f44;
+      white-space: nowrap;
+    }
+
+    .video-volume-wrap input[type='range'] {
+      flex: 1;
+      accent-color: #8f1f46;
+      cursor: pointer;
+    }
+
+    .video-volume-value {
+      min-width: 44px;
+      text-align: right;
+      font-size: 13px;
+      font-weight: 800;
+      color: #2f74d8;
     }
 
     .play-btn {
@@ -819,6 +851,19 @@
       #video .video-grid {
         grid-template-columns: 1fr;
       }
+
+      .video-volume-wrap {
+        flex-wrap: wrap;
+      }
+
+      .video-volume-wrap label {
+        width: 100%;
+      }
+
+      .video-volume-value {
+        margin-left: auto;
+      }
+
       #video .video-thumb {
         min-height: 320px;
       }
@@ -1055,6 +1100,73 @@
       }
     }
 
+    .music-control-panel {
+      position: fixed;
+      right: 16px;
+      bottom: 18px;
+      z-index: 1300;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 22px rgba(90, 23, 49, 0.28);
+    }
+
+    .music-toggle-btn {
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(143, 31, 70, 0.92), rgba(47, 116, 216, 0.88));
+      box-shadow: 0 7px 16px rgba(90, 23, 49, 0.32);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+      opacity: 0.92;
+    }
+
+    .music-toggle-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 26px rgba(90, 23, 49, 0.4);
+      opacity: 1;
+    }
+
+    .music-toggle-btn.playing {
+      background: linear-gradient(135deg, rgba(240, 122, 178, 0.96), rgba(47, 116, 216, 0.9));
+    }
+
+    .music-volume {
+      width: 108px;
+      accent-color: #8f1f46;
+      cursor: pointer;
+    }
+
+    .music-volume-value {
+      min-width: 38px;
+      text-align: right;
+      font-size: 12px;
+      font-weight: 800;
+      color: #7d1f44;
+    }
+
+    @media (max-width: 600px) {
+      .music-control-panel {
+        left: 10px;
+        right: 10px;
+        bottom: 10px;
+      }
+
+      .music-volume {
+        width: 100%;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       .fx-layer {
         display: none;
@@ -1249,6 +1361,11 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
   <!-- VIDEO -->
   <section class="section-card" id="video">
     <div class="section-title">🎬 Video</div>
+    <div class="video-volume-wrap">
+      <label for="videoVolume">Âm lượng video</label>
+      <input id="videoVolume" type="range" min="0" max="100" value="100" step="1" aria-label="Điều chỉnh âm lượng video"/>
+      <span class="video-volume-value" id="videoVolumeValue">100%</span>
+    </div>
     <div class="video-grid" id="video-grid"></div>
   </section>
     <!-- MỘT SỐ HÌNH ẢNH KHÁC -->
@@ -1278,6 +1395,18 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
     <button class="image-modal-close" id="imageModalClose" aria-label="Đóng ảnh">&times;</button>
     <img id="imageModalPreview" src="" alt="Ảnh phóng to"/>
   </div>
+</div>
+
+<audio id="bgm" loop preload="auto" autoplay>
+  <source src="img/video/nhac_nen.mp3" type="audio/mpeg" />
+</audio>
+
+<div class="music-control-panel" aria-label="Điều khiển nhạc nền">
+  <button class="music-toggle-btn" id="musicBtn" type="button" aria-label="Bật hoặc tắt nhạc nền">
+    Bật nhạc
+  </button>
+  <input class="music-volume" id="bgmVolume" type="range" min="0" max="100" value="45" step="1" aria-label="Âm lượng nhạc nền"/>
+  <span class="music-volume-value" id="bgmVolumeValue">45%</span>
 </div>
 
 <script>
@@ -1340,13 +1469,9 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
     links.forEach(l => l.classList.toggle('active', l.dataset.tab === tabId));
     cards.forEach(c => c.classList.remove('active'));
 
-    // Tab giới thiệu hiển thị tổng thể: hiện toàn bộ section-card.
+    // Tab giới thiệu chỉ hiển thị phần giới thiệu chính.
     if (tabId === 'gioi-thieu') {
-      cards.forEach(c => {
-        if (c.id !== 'truong_hoc-gioi-thieu' && c.id !== 'truong_hoc-story') {
-          c.classList.add('active');
-        }
-      });
+      document.getElementById('gioi-thieu')?.classList.add('active');
       return;
     }
 
@@ -1387,6 +1512,9 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
   });
 
   switchTab('gioi-thieu');
+  window.addEventListener('load', () => {
+    switchTab('gioi-thieu');
+  }, { once: true });
 
   /* ── MEDIA DATA TỪ THƯ MỤC img ── */
   const mediaData = {
@@ -1578,10 +1706,43 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
     });
   }
 
+  const videoVolumeSlider = document.getElementById('videoVolume');
+  const videoVolumeValue = document.getElementById('videoVolumeValue');
+
+  function applyVideoVolume(volumePercent, shouldToggleMute = false) {
+    const volume = Math.max(0, Math.min(100, Number(volumePercent))) / 100;
+    const videos = document.querySelectorAll('#video-grid video');
+    videos.forEach((video) => {
+      video.volume = volume;
+      if (shouldToggleMute) {
+        video.muted = volume === 0;
+        if (volume > 0) {
+          video.removeAttribute('muted');
+        } else {
+          video.setAttribute('muted', '');
+        }
+      }
+    });
+
+    if (videoVolumeValue) {
+      videoVolumeValue.textContent = `${Math.round(volume * 100)}%`;
+    }
+  }
+
+  function initVideoVolumeControl() {
+    if (!videoVolumeSlider) return;
+    applyVideoVolume(videoVolumeSlider.value, false);
+
+    videoVolumeSlider.addEventListener('input', () => {
+      applyVideoVolume(videoVolumeSlider.value, true);
+    });
+  }
+
   appendSliderImages();
   appendHorizontalGallery();
   appendVideoCards();
   initVideoAutoplay();
+  initVideoVolumeControl();
   appendImageCards('gallery-main', mediaData.khoAnh.slice(0, 6));
   appendImageCards('gallery-kho', mediaData.khoAnh);
   buildDots();
@@ -1590,17 +1751,17 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
 
   /* ── MEMBERS ── */
   const members = [
-    { name: 'Đào Văn Dũng', role: 'Trưởng nhóm · Coder chính · Biên soạn nội dung', color: '#7d2144', init: 'ĐD' },
-    { name: 'Nguyễn Phương Anh T8', role: 'Thiết kế', color: '#2f74d8', init: 'PA' },
-    { name: 'Nguyễn Phương Anh T3', role: 'Tổng hợp', color: '#f07ab2', init: 'PA' },
-    { name: 'Bùi Anh Kiệt', role: 'Thiết kế', color: '#4f89df', init: 'BK' },
-    { name: 'Trần Tuệ Linh', role: 'Phó nhóm', color: '#9b2f59', init: 'TL' },
-    { name: 'Bùi Nam Khánh', role: 'Kiểm tra', color: '#3e7edc', init: 'BK' },
-    { name: 'Vũ Văn Hiếu', role: 'Hiệu ứng / Hỗ trợ', color: '#cc4e86', init: 'VH' },
-    { name: 'Hoàng Hải Nam', role: 'Hỗ trợ tổng hợp', color: '#6a1d39', init: 'HN' },
-    { name: 'Nguyễn Xuân Nghĩa', role: 'Phụ trách / Tổng hợp', color: '#5b93e5', init: 'NN' },
-    { name: 'Phạm Minh Đức', role: 'Tổng hợp hình ảnh', color: '#b73969', init: 'ĐD' },
-    { name: 'Mai Quang Tiến', role: 'Tổng hợp video', color: '#8f244a', init: 'MT' },
+    { name: 'Đào Văn Dũng', role: 'Trưởng nhóm · Coder chính · Biên soạn nội dung', color: '#1d4ed8', init: 'ĐD' },
+    { name: 'Nguyễn Phương Anh T8', role: 'Thiết kế', color: '#dc2626', init: 'PA' },
+    { name: 'Nguyễn Phương Anh T3', role: 'Tổng hợp', color: '#7e22ce', init: 'PA' },
+    { name: 'Bùi Anh Kiệt', role: 'Thiết kế', color: '#ca8a04', init: 'BK' },
+    { name: 'Trần Tuệ Linh', role: 'Phó nhóm', color: '#0f766e', init: 'TL' },
+    { name: 'Bùi Nam Khánh', role: 'Kiểm tra', color: '#ea580c', init: 'BK' },
+    { name: 'Vũ Văn Hiếu', role: 'Hiệu ứng / Hỗ trợ', color: '#be185d', init: 'VH' },
+    { name: 'Hoàng Hải Nam', role: 'Hỗ trợ tổng hợp', color: '#4338ca', init: 'HN' },
+    { name: 'Nguyễn Xuân Nghĩa', role: 'Phụ trách / Tổng hợp', color: '#0891b2', init: 'NN' },
+    { name: 'Phạm Minh Đức', role: 'Tổng hợp hình ảnh', color: '#65a30d', init: 'ĐD' },
+    { name: 'Mai Quang Tiến', role: 'Tổng hợp video', color: '#9a3412', init: 'MT' },
   ];
 
   const membersGrid = document.getElementById('members-grid');
@@ -1656,6 +1817,96 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
       closeImageModal();
     }
   });
+
+  /* ── BACKGROUND MUSIC ── */
+  const bgm = document.getElementById('bgm');
+  const musicBtn = document.getElementById('musicBtn');
+  const bgmVolume = document.getElementById('bgmVolume');
+  const bgmVolumeValue = document.getElementById('bgmVolumeValue');
+  let userHasInteractedForMusic = false;
+
+  function setBackgroundMusicVolume(percent) {
+    if (!bgm) return;
+    const safePercent = Math.max(0, Math.min(100, Number(percent)));
+    const volume = safePercent / 100;
+    bgm.volume = volume;
+
+    if (bgmVolumeValue) {
+      bgmVolumeValue.textContent = `${safePercent}%`;
+    }
+  }
+
+  function setMusicButtonState(isPlaying) {
+    if (!musicBtn) return;
+    musicBtn.classList.toggle('playing', isPlaying);
+    musicBtn.textContent = isPlaying ? 'Tắt nhạc' : 'Bật nhạc';
+  }
+
+  async function playBackgroundMusic() {
+    if (!bgm) return false;
+    try {
+      await bgm.play();
+      setMusicButtonState(true);
+      return true;
+    } catch (error) {
+      setMusicButtonState(false);
+      return false;
+    }
+  }
+
+  function pauseBackgroundMusic() {
+    if (!bgm) return;
+    bgm.pause();
+    setMusicButtonState(false);
+  }
+
+  async function tryAutoStartBackgroundMusic() {
+    if (!bgm || !bgm.paused) return;
+    await playBackgroundMusic();
+  }
+
+  musicBtn?.addEventListener('click', async () => {
+    userHasInteractedForMusic = true;
+    if (!bgm) return;
+
+    if (bgm.paused) {
+      const played = await playBackgroundMusic();
+      if (!played && musicBtn) {
+        musicBtn.textContent = 'Nhấn lại để bật nhạc';
+      }
+      return;
+    }
+
+    pauseBackgroundMusic();
+  });
+
+  const startMusicOnFirstInteraction = async () => {
+    if (userHasInteractedForMusic || !bgm || !bgm.paused) return;
+    userHasInteractedForMusic = true;
+    await playBackgroundMusic();
+  };
+
+  document.addEventListener('pointerdown', startMusicOnFirstInteraction, { once: true });
+  document.addEventListener('keydown', startMusicOnFirstInteraction, { once: true });
+  document.addEventListener('wheel', startMusicOnFirstInteraction, { once: true });
+  window.addEventListener('touchstart', startMusicOnFirstInteraction, { once: true, passive: true });
+
+  window.addEventListener('load', tryAutoStartBackgroundMusic, { once: true });
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      tryAutoStartBackgroundMusic();
+    }
+  });
+
+  if (bgmVolume) {
+    setBackgroundMusicVolume(bgmVolume.value);
+    bgmVolume.addEventListener('input', () => {
+      userHasInteractedForMusic = true;
+      setBackgroundMusicVolume(bgmVolume.value);
+    });
+  }
+
+  tryAutoStartBackgroundMusic();
 
   /* ── GLOBAL DECOR FX ── */
   const fxSeeds = document.getElementById('fxSeeds');
