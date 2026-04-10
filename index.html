@@ -9,15 +9,15 @@
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     :root {
-      --teal: #3ecfb2;
-      --purple: #b09de8;
-      --navy: #1a1a2e;
+      --teal: #f07ab2;
+      --purple: #6d1f3b;
+      --navy: #5a1731;
       --white: #ffffff;
-      --text: #2d2d2d;
+      --text: #2f2230;
       --muted: #555;
-      --red-accent: #e05a6a;
-      --blue-accent: #2a7fd4;
-      --yellow: #ffe96a;
+      --red-accent: #8f1f46;
+      --blue-accent: #2f74d8;
+      --yellow: #ffe7f3;
       --card-radius: 18px;
     }
 
@@ -25,13 +25,21 @@
 
     body {
       font-family: 'Nunito', sans-serif;
-      background: linear-gradient(135deg, #3ecfb2 0%, #91bbee 55%, #c9b4f0 100%);
+      background: linear-gradient(135deg, #ffe8f3 0%, #ffffff 45%, #d8e8ff 100%);
       min-height: 100vh;
       color: var(--text);
+      display: grid;
+      grid-template-columns: 240px minmax(0, 1fr);
+      grid-template-rows: auto 1fr auto;
+      grid-template-areas:
+        'nav header'
+        'nav main'
+        'nav footer';
     }
 
     /* ── HEADER ── */
     header {
+      grid-area: header;
       text-align: center;
       padding: 44px 20px 24px;
       position: relative;
@@ -40,18 +48,19 @@
     header h1 {
       font-family: 'Dancing Script', cursive;
       font-size: 56px;
-      color: #fff;
-      text-shadow: 0 3px 12px rgba(0,0,0,0.18);
+      color: #7d1f44;
+      text-shadow: 0 2px 10px rgba(255,255,255,0.5);
       letter-spacing: 2px;
       animation: fadeDown 0.7s ease both;
     }
 
     header .tagline {
-      color: var(--yellow);
+      color: #2f74d8;
       font-size: 17px;
       font-weight: 600;
       letter-spacing: 2px;
       margin-top: 6px;
+      text-shadow: 0 1px 6px rgba(255,255,255,0.55);
       animation: fadeDown 0.9s ease both;
     }
 
@@ -62,39 +71,47 @@
 
     /* ── NAV ── */
     nav {
+      grid-area: nav;
       background: var(--navy);
       position: sticky;
       top: 0;
+      height: 100vh;
+      align-self: start;
       z-index: 100;
       box-shadow: 0 2px 12px rgba(0,0,0,0.25);
+      padding: 18px 0;
     }
 
     nav ul {
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
+      flex-direction: column;
+      justify-content: flex-start;
       list-style: none;
     }
 
     nav ul li a {
       display: block;
-      padding: 15px 28px;
+      padding: 14px 22px;
       color: #ccc;
       text-decoration: none;
       font-size: 15px;
       font-weight: 600;
       transition: color 0.2s, background 0.2s;
       position: relative;
+      border-left: 3px solid transparent;
     }
 
     nav ul li a::after {
       content: '';
       position: absolute;
-      bottom: 0; left: 50%;
-      width: 0; height: 3px;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+      width: 3px;
+      height: 0;
       background: var(--teal);
       border-radius: 2px;
-      transition: width 0.25s, left 0.25s;
+      transition: height 0.25s;
     }
 
     nav ul li a:hover,
@@ -105,11 +122,12 @@
 
     nav ul li a:hover::after,
     nav ul li a.active::after {
-      width: 100%; left: 0;
+      height: 70%;
     }
 
     /* ── MAIN ── */
     main {
+      grid-area: main;
       max-width: 920px;
       margin: 28px auto 48px;
       padding: 0 16px;
@@ -120,11 +138,17 @@
 
     /* ── SECTION CARDS ── */
     .section-card {
-      background: #fff;
+      background: #ffffff;
       border-radius: var(--card-radius);
-      padding: 34px 40px;
+      padding: 24px 28px;
       animation: fadeUp 0.6s ease both;
       display: none;
+      border: 1px solid #f2d7e5;
+      box-shadow: 0 14px 32px rgba(109, 31, 59, 0.1);
+      width: 100%;
+      max-width: 840px;
+      min-height: 360px;
+      margin: 0 auto;
     }
 
     .section-card.active {
@@ -147,6 +171,59 @@
     }
 
     /* ── INTRO ── */
+    .intro-hero {
+      display: grid;
+      grid-template-columns: minmax(220px, 0.9fr) minmax(0, 1.6fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .intro-side {
+      border-radius: 14px;
+      background: linear-gradient(155deg, #6d1f3b 0%, #8f2a53 45%, #2f74d8 100%);
+      color: #fff;
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      box-shadow: 0 10px 26px rgba(109, 31, 59, 0.3);
+    }
+
+    .intro-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .intro-side h3 {
+      font-size: 22px;
+      line-height: 1.3;
+      font-weight: 800;
+    }
+
+    .intro-side-note {
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: #fbe8f2;
+    }
+
+    .intro-main {
+      border-radius: 14px;
+      border: 1px solid #f5d2e3;
+      background: linear-gradient(180deg, #ffffff 0%, #fef6fb 55%, #f3f8ff 100%);
+      padding: 20px 22px;
+    }
+
     .intro-tagline {
       font-size: 17px;
       font-style: italic;
@@ -167,11 +244,13 @@
       font-weight: 700;
       margin-top: 12px;
       font-size: 15.5px;
+      border-left: 4px solid #f39ac4;
+      padding-left: 10px;
     }
 
     .school-intro-box {
-      background: linear-gradient(135deg, #f2fbff, #f7f9ff);
-      border: 1px solid #dbeafe;
+      background: linear-gradient(135deg, #fff2f8, #f2f7ff);
+      border: 1px solid #ead2e0;
       border-radius: 14px;
       padding: 18px 20px;
     }
@@ -185,7 +264,7 @@
 
     .school-intro-box p:last-child {
       margin-bottom: 0;
-      color: #1f4f8a;
+      color: #7f2043;
       font-weight: 700;
     }
 
@@ -210,8 +289,8 @@
     .school-story-text {
       border-radius: 12px;
       overflow: hidden;
-      border: 1px solid #dbeafe;
-      background: #f8fbff;
+      border: 1px solid #edd4e2;
+      background: #fef8fc;
     }
 
     .school-story-media {
@@ -224,7 +303,7 @@
       object-fit: contain;
       object-position: center;
       display: block;
-      background: #eef4ff;
+      background: #f4f7ff;
     }
 
     .school-story-text {
@@ -237,18 +316,18 @@
 
     .school-story-text h4 {
       font-size: 17px;
-      color: #174780;
+      color: #7d1f44;
       font-weight: 800;
     }
 
     .school-story-text p {
       font-size: 14.5px;
       line-height: 1.75;
-      color: #3a4a61;
+      color: #4f3952;
     }
 
     .school-story-hint {
-      color: #2a7fd4;
+      color: #2f74d8;
       font-style: italic;
       font-weight: 700;
       text-align: justify;
@@ -272,12 +351,12 @@
       border-radius: 12px;
       object-fit: cover;
       flex-shrink: 0;
-      background: #e8f5e9;
+      background: #fff1f7;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      border: 3px solid #c8e6c9;
+      border: 3px solid #f0bfd7;
     }
 
     .teacher-photo svg { width: 100%; height: 100%; }
@@ -288,7 +367,7 @@
       object-fit: contain;
       object-position: center;
       display: block;
-      background: #f2f7ff;
+      background: #f6f9ff;
     }
 
     .teacher-info h3 {
@@ -318,7 +397,7 @@
     }
 
     .teacher-scroll-text::-webkit-scrollbar-thumb {
-      background: #b7c4df;
+      background: #c694ae;
       border-radius: 999px;
     }
 
@@ -340,14 +419,14 @@
     }
 
     .gallery-grid.scrollable::-webkit-scrollbar-thumb {
-      background: #9cc6ef;
+      background: #c88ead;
       border-radius: 999px;
     }
 
     .gallery-item {
       border-radius: 10px;
       overflow: hidden;
-      background: linear-gradient(135deg, #b2dfdb, #ce93d8);
+      background: linear-gradient(135deg, #f8accf, #5c95e8);
       height: 160px;
       display: flex;
       align-items: center;
@@ -373,6 +452,20 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     }
 
+    #kho-anh {
+      max-width: 980px;
+      min-height: 420px;
+    }
+
+    #kho-anh .gallery-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    #kho-anh .gallery-item {
+      height: 210px;
+    }
+
     /* ── VIDEO ── */
     .video-grid {
       display: grid;
@@ -383,7 +476,7 @@
     .video-thumb {
       border-radius: 10px;
       overflow: hidden;
-      background: linear-gradient(135deg, #1a1a2e, #3a3a5e);
+      background: linear-gradient(135deg, #5a1731, #2f74d8);
       height: 160px;
       display: flex;
       flex-direction: column;
@@ -396,6 +489,21 @@
     }
 
     .video-thumb:hover { transform: scale(1.03); }
+
+    #video {
+      max-width: 980px;
+      min-height: 420px;
+    }
+
+    #video .video-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    #video .video-thumb {
+      min-height: 360px;
+    }
 
     .play-btn {
       width: 52px;
@@ -425,17 +533,17 @@
     }
 
     .member-card {
-      background: #f7f9ff;
+      background: linear-gradient(180deg, #fff6fb, #f4f8ff);
       border-radius: 12px;
       padding: 18px 10px 14px;
       text-align: center;
-      border: 1.5px solid #e0e7ff;
+      border: 1.5px solid #edd0e0;
       transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .member-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(100,100,200,0.12);
+      box-shadow: 0 8px 20px rgba(109, 31, 59, 0.16);
     }
 
     .member-avatar {
@@ -594,7 +702,7 @@
     .hgallery-item:hover img { transform: scale(1.06); }
 
     .hgallery-item.placeholder {
-      background: linear-gradient(135deg,#b2dfdb,#80cbc4);
+      background: linear-gradient(135deg,#f3a6cb,#5c95e8);
       display: flex; align-items: center; justify-content: center;
       color: #fff; font-size: 13px; font-weight: 700;
     }
@@ -648,9 +756,75 @@
 
     .yt-link:hover { text-decoration: underline; }
 
+    @media (max-width: 900px) {
+      body {
+        display: block;
+      }
+
+      #kho-anh .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      #video .video-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      nav {
+        position: sticky;
+        height: auto;
+        padding: 0;
+      }
+
+      nav ul {
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      nav ul li a {
+        padding: 12px 14px;
+        font-size: 13px;
+        border-left: none;
+      }
+
+      nav ul li a::after {
+        top: auto;
+        left: 50%;
+        bottom: 0;
+        transform: none;
+        width: 0;
+        height: 3px;
+        transition: width 0.25s, left 0.25s;
+      }
+
+      nav ul li a:hover::after,
+      nav ul li a.active::after {
+        width: 100%;
+        left: 0;
+      }
+    }
+
     @media (max-width: 600px) {
       .hgallery-item { min-width: calc(50% - 7px); }
       .video-embed-wrap { width: 100%; }
+      .intro-hero {
+        grid-template-columns: 1fr;
+      }
+      #kho-anh,
+      #video {
+        max-width: 100%;
+        min-height: 0;
+      }
+      #kho-anh .gallery-grid,
+      #video .video-grid {
+        grid-template-columns: 1fr;
+      }
+      #video .video-thumb {
+        min-height: 320px;
+      }
+      #kho-anh .gallery-item {
+        height: 220px;
+      }
       .school-story-item,
       .school-story-item.reverse {
         grid-template-columns: 1fr;
@@ -672,12 +846,12 @@
     @media (max-width: 600px) {
       header h1 { font-size: 38px; }
       .section-card { padding: 22px 20px; }
-      nav ul li a { padding: 12px 14px; font-size: 13px; }
       .teacher-wrap { flex-direction: column; }
       .teacher-photo { width: 100%; height: 180px; }
     }
 
     footer {
+      grid-area: footer;
       text-align: center;
       padding: 20px 12px 24px;
       margin-top: 18px;
@@ -685,7 +859,7 @@
       font-size: 14px;
       font-weight: 700;
       letter-spacing: 0.6px;
-      background: linear-gradient(90deg, rgba(26, 26, 46, 0.78), rgba(42, 127, 212, 0.58), rgba(224, 90, 106, 0.62));
+      background: linear-gradient(90deg, rgba(90, 23, 49, 0.84), rgba(47, 116, 216, 0.62), rgba(240, 122, 178, 0.68));
       backdrop-filter: blur(4px);
       border-top: 1px solid rgba(255, 255, 255, 0.28);
       box-shadow: 0 -10px 24px rgba(0, 0, 0, 0.18);
@@ -699,7 +873,7 @@
     .image-modal {
       position: fixed;
       inset: 0;
-      background: rgba(8, 14, 24, 0.86);
+      background: rgba(58, 14, 34, 0.84);
       display: none;
       align-items: center;
       justify-content: center;
@@ -730,7 +904,7 @@
       height: 100%;
       object-fit: contain;
       display: block;
-      background: #0c1118;
+      background: #2a1320;
     }
 
     .image-modal-close {
@@ -754,13 +928,149 @@
     .image-modal-close:hover {
       background: rgba(0, 0, 0, 0.75);
     }
+
+    /* ── GLOBAL FX: CỎ MAY / BÓNG BAY / SAO RƠI ── */
+    .fx-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 5;
+    }
+
+    .fx-seed {
+      position: absolute;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #ffffff 0%, #ffe9f5 65%, rgba(255, 255, 255, 0.1) 100%);
+      filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.65));
+      animation: seedDrift linear forwards;
+      opacity: 0.9;
+    }
+
+    .fx-seed::after {
+      content: '';
+      position: absolute;
+      width: 22px;
+      height: 1px;
+      left: 7px;
+      top: 4px;
+      background: rgba(255, 255, 255, 0.7);
+      transform-origin: left center;
+      transform: rotate(-16deg);
+    }
+
+    @keyframes seedDrift {
+      0% {
+        transform: translate3d(-12vw, 10vh, 0) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 0.9; }
+      100% {
+        transform: translate3d(112vw, -14vh, 0) rotate(520deg);
+        opacity: 0;
+      }
+    }
+
+    .fx-balloon {
+      position: absolute;
+      bottom: -120px;
+      width: 38px;
+      height: 52px;
+      border-radius: 50% 50% 46% 46%;
+      background: var(--balloon-color, #f07ab2);
+      box-shadow: inset -6px -9px 0 rgba(0, 0, 0, 0.08);
+      animation: balloonRise linear forwards;
+      opacity: 0.82;
+    }
+
+    .fx-balloon::before {
+      content: '';
+      position: absolute;
+      width: 8px;
+      height: 10px;
+      bottom: -6px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(90, 23, 49, 0.8);
+      clip-path: polygon(0 0, 100% 0, 50% 100%);
+    }
+
+    .fx-balloon::after {
+      content: '';
+      position: absolute;
+      width: 1.5px;
+      height: 88px;
+      left: 50%;
+      top: 52px;
+      transform: translateX(-50%);
+      background: rgba(90, 23, 49, 0.45);
+    }
+
+    @keyframes balloonRise {
+      0% {
+        transform: translate3d(0, 0, 0) rotate(-3deg);
+        opacity: 0;
+      }
+      8% { opacity: 0.82; }
+      100% {
+        transform: translate3d(var(--drift-x, 20px), -125vh, 0) rotate(5deg);
+        opacity: 0;
+      }
+    }
+
+    .fx-star {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.95);
+      animation: starFall linear forwards;
+      opacity: 0.95;
+    }
+
+    .fx-star::after {
+      content: '';
+      position: absolute;
+      width: 70px;
+      height: 1.5px;
+      top: 1px;
+      right: 0;
+      transform: translateX(-3px) rotate(-22deg);
+      transform-origin: right center;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.72));
+    }
+
+    @keyframes starFall {
+      0% {
+        transform: translate3d(0, 0, 0);
+        opacity: 0;
+      }
+      12% { opacity: 0.95; }
+      100% {
+        transform: translate3d(-180px, 220px, 0);
+        opacity: 0;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fx-layer {
+        display: none;
+      }
+    }
   </style>
 </head>
 <body>
 
+<div class="fx-layer" id="fxSeeds" aria-hidden="true"></div>
+<div class="fx-layer" id="fxBalloons" aria-hidden="true"></div>
+<div class="fx-layer" id="fxStars" aria-hidden="true"></div>
+
 <header>
-  <h1>🎓 Lớp 12A1 🎓</h1>
-  <div class="tagline">✨ Thanh xuân rực rỡ ✨</div>
+  <h1>🎓 Lớp 12A1 - Trung học phổ thông Thụy Hương 🎓</h1>
+  <div class="tagline">✨ Thanh xuân vườn trường ✨</div>
 </header>
 
 <nav>
@@ -778,16 +1088,24 @@
 <main>
 
   <!-- GIỚI THIỆU -->
-  <section class="section-card active" id="gioi-thieu">
-    <div class="section-title">🏫 Giới thiệu</div>
-    <div class="intro-tagline">12A1 – nơi chứa đầy kỷ niệm thanh xuân 🌟</div>
-    <div class="intro-body">
-      <p><strong>Không chỉ là một lớp học, mà là cả một bầu trời thanh xuân.</strong></p>
-      <p>Nơi có những con người "không hoàn hảo" nhưng tạo nên những kỷ niệm hoàn hảo.</p>
-      <p>Cùng nhau học, cùng nhau chơi, cùng nhau "toang" rồi lại cùng nhau đứng dậy.</p>
-      <p class="intro-highlight">Sau này mỗi người một hướng, nhưng 12A1 sẽ luôn là nơi bắt đầu của những điều đẹp nhất 💙✨</p>
+<section class="section-card active" id="gioi-thieu">
+  <div class="intro-hero">
+    <aside class="intro-side">
+      <span class="intro-badge">12A1 Story</span>
+      <h3>🚀 12A1 – Không chỉ là một lớp học</h3>
+      <p class="intro-side-note">Nơi từng ngày học bình thường đã trở thành ký ức đặc biệt của cả một tập thể.</p>
+    </aside>
+    <div class="intro-main">
+      <div class="intro-tagline">Nơi bắt đầu của hành trình trưởng thành</div>
+      <div class="intro-body">
+        <p><strong>12A1 là nơi hội tụ của những cá tính khác biệt.</strong></p>
+        <p>Mỗi người một màu sắc, nhưng khi kết hợp lại tạo nên một tập thể độc đáo.</p>
+        <p>Chúng mình đã cùng nhau trải qua những thử thách, những niềm vui và cả những thất bại.</p>
+        <p class="intro-highlight">Và chính những điều đó đã tạo nên một 12A1 không thể thay thế 💫</p>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
     <!-- TRƯỜNG HỌC -->
   <section class="section-card" id="truong_hoc">
@@ -1195,6 +1513,13 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
     if (!container) return;
     container.innerHTML = '';
 
+    const videoTitles = [
+      'Chuẩn bị background kỉ yếu của chúng tớ',
+      'Trung thu và những buổi nhậu của 12A1',
+      'Văn nghệ 20/11 của chúng tớ',
+      'Chúng tớ tặng quà cô chủ nhiệm ngày nhà giáo 20/11'
+    ];
+
     if (!mediaData.video.length) {
       const empty = document.createElement('div');
       empty.className = 'video-thumb';
@@ -1206,25 +1531,57 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
     mediaData.video.forEach((path, index) => {
       const card = document.createElement('div');
       card.className = 'video-thumb';
-      card.style.background = '#0f172a';
+      card.style.background = 'linear-gradient(135deg, #5a1731, #2f74d8)';
       card.style.padding = '8px';
       card.style.height = 'auto';
-      card.style.minHeight = '220px';
+      card.style.minHeight = '360px';
 
       card.innerHTML = `
-        <video controls preload="none" playsinline style="width:100%;aspect-ratio:16/9;border-radius:8px;background:#000;display:block;">
+        <video controls muted preload="metadata" playsinline style="width:100%;aspect-ratio:16/9;border-radius:8px;background:#000;display:block;">
           <source src="${path}" type="video/mp4" />
           Trình duyệt không hỗ trợ video.
         </video>
-        <span style="font-size:13px;font-weight:700;margin-top:8px;text-align:center;display:block;">Video ${index + 1}</span>
+        <span style="font-size:13px;font-weight:700;margin-top:8px;text-align:center;display:block;">${videoTitles[index] || `Video ${index + 1}`}</span>
       `;
       container.appendChild(card);
+    });
+  }
+
+  const videoAutoObserver = 'IntersectionObserver' in window
+    ? new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target;
+        if (!(video instanceof HTMLVideoElement)) return;
+
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.55) {
+          const playAttempt = video.play();
+          if (playAttempt && typeof playAttempt.catch === 'function') {
+            playAttempt.catch(() => {});
+          }
+        } else {
+          video.pause();
+        }
+      });
+    }, { threshold: [0.35, 0.55, 0.8] })
+    : null;
+
+  function initVideoAutoplay() {
+    const videos = document.querySelectorAll('#video-grid video');
+    videos.forEach((video) => {
+      video.muted = true;
+      video.playsInline = true;
+      video.setAttribute('muted', '');
+
+      if (videoAutoObserver) {
+        videoAutoObserver.observe(video);
+      }
     });
   }
 
   appendSliderImages();
   appendHorizontalGallery();
   appendVideoCards();
+  initVideoAutoplay();
   appendImageCards('gallery-main', mediaData.khoAnh.slice(0, 6));
   appendImageCards('gallery-kho', mediaData.khoAnh);
   buildDots();
@@ -1233,17 +1590,17 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
 
   /* ── MEMBERS ── */
   const members = [
-    { name: 'Đào Văn Dũng', role: 'Trưởng nhóm · Coder chính · Biên soạn nội dung', color: '#5c6bc0', init: 'ĐD' },
-    { name: 'Nguyễn Phương Anh T8', role: 'Thiết kế', color: '#26a69a', init: 'PA' },
-    { name: 'Nguyễn Phương Anh T3', role: 'Tổng hợp', color: '#ec407a', init: 'PA' },
-    { name: 'Bùi Anh Kiệt', role: 'Thiết kế', color: '#42a5f5', init: 'BK' },
-    { name: 'Trần Tuệ Linh', role: 'Phó nhóm', color: '#66bb6a', init: 'TL' },
-    { name: 'Bùi Nam Khánh', role: 'Kiểm tra', color: '#ab47bc', init: 'BK' },
-    { name: 'Vũ Văn Hiếu', role: 'Hiệu ứng / Hỗ trợ', color: '#ff7043', init: 'VH' },
-    { name: 'Hoàng Hải Nam', role: 'Hỗ trợ tổng hợp', color: '#ffca28', init: 'HN' },
-    { name: 'Nguyễn Xuân Nghĩa', role: 'Phụ trách / Tổng hợp', color: '#26c6da', init: 'NN' },
-    { name: 'Phạm Minh Đức', role: 'Tổng hợp hình ảnh', color: '#7e57c2', init: 'ĐD' },
-    { name: 'Mai Quang Tiến', role: 'Tổng hợp video', color: '#ef5350', init: 'MT' },
+    { name: 'Đào Văn Dũng', role: 'Trưởng nhóm · Coder chính · Biên soạn nội dung', color: '#7d2144', init: 'ĐD' },
+    { name: 'Nguyễn Phương Anh T8', role: 'Thiết kế', color: '#2f74d8', init: 'PA' },
+    { name: 'Nguyễn Phương Anh T3', role: 'Tổng hợp', color: '#f07ab2', init: 'PA' },
+    { name: 'Bùi Anh Kiệt', role: 'Thiết kế', color: '#4f89df', init: 'BK' },
+    { name: 'Trần Tuệ Linh', role: 'Phó nhóm', color: '#9b2f59', init: 'TL' },
+    { name: 'Bùi Nam Khánh', role: 'Kiểm tra', color: '#3e7edc', init: 'BK' },
+    { name: 'Vũ Văn Hiếu', role: 'Hiệu ứng / Hỗ trợ', color: '#cc4e86', init: 'VH' },
+    { name: 'Hoàng Hải Nam', role: 'Hỗ trợ tổng hợp', color: '#6a1d39', init: 'HN' },
+    { name: 'Nguyễn Xuân Nghĩa', role: 'Phụ trách / Tổng hợp', color: '#5b93e5', init: 'NN' },
+    { name: 'Phạm Minh Đức', role: 'Tổng hợp hình ảnh', color: '#b73969', init: 'ĐD' },
+    { name: 'Mai Quang Tiến', role: 'Tổng hợp video', color: '#8f244a', init: 'MT' },
   ];
 
   const membersGrid = document.getElementById('members-grid');
@@ -1299,6 +1656,61 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
       closeImageModal();
     }
   });
+
+  /* ── GLOBAL DECOR FX ── */
+  const fxSeeds = document.getElementById('fxSeeds');
+  const fxBalloons = document.getElementById('fxBalloons');
+  const fxStars = document.getElementById('fxStars');
+
+  function randomRange(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  function createSeed() {
+    if (!fxSeeds) return;
+    const seed = document.createElement('span');
+    seed.className = 'fx-seed';
+    seed.style.top = `${randomRange(22, 90)}vh`;
+    seed.style.left = `${randomRange(-12, -2)}vw`;
+    seed.style.animationDuration = `${randomRange(10, 18)}s`;
+    seed.style.animationDelay = `${randomRange(0, 0.5)}s`;
+    fxSeeds.appendChild(seed);
+    seed.addEventListener('animationend', () => seed.remove(), { once: true });
+  }
+
+  function createBalloon() {
+    if (!fxBalloons) return;
+    const balloon = document.createElement('span');
+    balloon.className = 'fx-balloon';
+    const colors = ['#f07ab2', '#2f74d8', '#8f1f46', '#f7a6cc'];
+    balloon.style.setProperty('--balloon-color', colors[Math.floor(Math.random() * colors.length)]);
+    balloon.style.left = `${randomRange(4, 96)}vw`;
+    balloon.style.setProperty('--drift-x', `${randomRange(-46, 46)}px`);
+    balloon.style.animationDuration = `${randomRange(14, 23)}s`;
+    fxBalloons.appendChild(balloon);
+    balloon.addEventListener('animationend', () => balloon.remove(), { once: true });
+  }
+
+  function createStar() {
+    if (!fxStars) return;
+    const star = document.createElement('span');
+    star.className = 'fx-star';
+    star.style.top = `${randomRange(6, 46)}vh`;
+    star.style.left = `${randomRange(62, 100)}vw`;
+    star.style.animationDuration = `${randomRange(1.3, 2.3)}s`;
+    fxStars.appendChild(star);
+    star.addEventListener('animationend', () => star.remove(), { once: true });
+  }
+
+  for (let i = 0; i < 10; i += 1) createSeed();
+  for (let i = 0; i < 4; i += 1) createBalloon();
+
+  setInterval(createSeed, 1100);
+  setInterval(createBalloon, 3200);
+  setInterval(() => {
+    createStar();
+    if (Math.random() > 0.65) createStar();
+  }, 1400);
 </script>
 </body>
 </html>
