@@ -90,7 +90,9 @@
     }
 
     nav ul li a {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 10px;
       padding: 14px 22px;
       color: #ccc;
       text-decoration: none;
@@ -99,6 +101,13 @@
       transition: color 0.2s, background 0.2s;
       position: relative;
       border-left: 3px solid transparent;
+    }
+
+    .nav-icon {
+      width: 18px;
+      text-align: center;
+      opacity: 0.95;
+      flex-shrink: 0;
     }
 
     nav ul li a::after {
@@ -817,6 +826,11 @@
         padding: 12px 14px;
         font-size: 13px;
         border-left: none;
+        gap: 6px;
+      }
+
+      .nav-icon {
+        width: 16px;
       }
 
       nav ul li a::after {
@@ -1187,13 +1201,13 @@
 
 <nav>
   <ul>
-    <li><a href="#" class="active" data-tab="gioi-thieu">Giới thiệu chung</a></li>
-    <li><a href="#" data-tab="truong_hoc">Trường học</a></li>
-    <li><a href="#" data-tab="giao-vien">Giáo viên chủ nhiệm</a></li>
-    <li><a href="#" data-tab="anh">Ảnh tập thể</a></li>
-    <li><a href="#" data-tab="kho-anh">Kho ảnh</a></li>
-    <li><a href="#" data-tab="video">Video</a></li>
-    <li><a href="#" data-tab="thanh-vien">Thành viên</a></li>
+    <li><a href="#" class="active" data-tab="gioi-thieu"><span class="nav-icon">🏠</span><span>Giới thiệu chung</span></a></li>
+    <li><a href="#" data-tab="truong_hoc"><span class="nav-icon">🏫</span><span>Trường học</span></a></li>
+    <li><a href="#" data-tab="giao-vien"><span class="nav-icon">👩‍🏫</span><span>Giáo viên chủ nhiệm</span></a></li>
+    <li><a href="#" data-tab="anh"><span class="nav-icon">📸</span><span>Ảnh tập thể</span></a></li>
+    <li><a href="#" data-tab="kho-anh"><span class="nav-icon">🗂️</span><span>Kho ảnh</span></a></li>
+    <li><a href="#" data-tab="video"><span class="nav-icon">🎬</span><span>Video</span></a></li>
+    <li><a href="#" data-tab="thanh-vien"><span class="nav-icon">👥</span><span>Thành viên</span></a></li>
   </ul>
 </nav>
 
@@ -1469,9 +1483,13 @@ Chúng em xin gửi đến cô lời cảm ơn chân thành và sâu sắc nhấ
     links.forEach(l => l.classList.toggle('active', l.dataset.tab === tabId));
     cards.forEach(c => c.classList.remove('active'));
 
-    // Tab giới thiệu chỉ hiển thị phần giới thiệu chính.
+    // Tab giới thiệu hiển thị tổng thể: hiện toàn bộ section-card.
     if (tabId === 'gioi-thieu') {
-      document.getElementById('gioi-thieu')?.classList.add('active');
+      cards.forEach(c => {
+        if (c.id !== 'truong_hoc-gioi-thieu' && c.id !== 'truong_hoc-story') {
+          c.classList.add('active');
+        }
+      });
       return;
     }
 
